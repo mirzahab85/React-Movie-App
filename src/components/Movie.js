@@ -1,5 +1,6 @@
 import React from 'react'
 
+
 const setVoteClass = (vote) => {
     if (vote >= 8) {
         return "green";
