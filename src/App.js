@@ -40,7 +40,6 @@ function App() {
 
   if(searchTerm.length > 2) {
         getMovies(SEARCH_API + searchTerm);
-
         setSearchTerm(e.target.value);
     }
   };
