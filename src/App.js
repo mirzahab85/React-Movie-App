@@ -35,24 +35,21 @@ function App() {
     });
   }
 
-  const handleOnSubmit = (e) => {
-    e.preventDefault();
-
-  if(searchTerm.length > 2) {
-        getMovies(SEARCH_API + searchTerm);
-        setSearchTerm(e.target.value);
-    }
-  };
-
   const handleOnChnage = (e) => {
     e.preventDefault();
-    setSearchTerm(e.target.value);
+
+    if(searchTerm.length > 1) {
+      getMovies(SEARCH_API + searchTerm);
+ 
+    } 
+
+   setSearchTerm(e.target.value);
+
   }
   
   return (
     <>
     <header>
-      <form onSubmit={handleOnSubmit}>
         <input 
             className="search" 
             type="search" 
@@ -60,7 +57,6 @@ function App() {
             value={searchTerm} 
             onChange={handleOnChnage}
         />
-        </form>
         {info.map((n,i) => <p key={i}>
         {n.title}
         </p>
