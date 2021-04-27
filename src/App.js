@@ -5,9 +5,9 @@ import Movie from "./components/Movie";
 import React, { useEffect, useState } from "react";
 
 const FEATURED_API ="https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=2ae13bacb05742feb24cddf8e6d72335&page=1";
-
 const IMG_API = "https://image.tmdb.org/t/p/w500";
 const SEARCH_API = "https://api.themoviedb.org/3/search/movie?&api_key=2ae13bacb05742feb24cddf8e6d72335&query="
+const TOP_10_MOVIES = "https://api.themoviedb.org/3/movie/top_rated?api_key=2ae13bacb05742feb24cddf8e6d72335&language=en-US&page=1"
 
 function App() {
   const [ info, setInfo] = useState([]);
@@ -18,7 +18,16 @@ function App() {
   useEffect(() => {   
     fetchInfo();
     getMovies(FEATURED_API);
-  }, []);
+
+    if(searchTerm.length == 0){
+      fetch(`{API}$query=${search}`);
+    }else {
+      fetch(`{API}$query=${search}`);
+    }
+    },[searchTerm]);
+
+    
+  
 
   const fetchInfo = () => {
     fetch(`{API}$query=${search}`)
@@ -62,6 +71,9 @@ function App() {
         </p>
         )}
     </header>
+    <div className="movie-main">
+      10 MOVIES/TV SHOWS
+    </div>
       <div className="movie-container">
         {movies.length > 0 && movies.map((movie) => <Movie key={movie.id} {...movie} />)}
       </div>

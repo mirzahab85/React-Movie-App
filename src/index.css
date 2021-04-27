@@ -40,6 +40,17 @@ header {
   outline: 0;
 }
 
+.movie-main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 10px auto;
+  font-size: 25px;
+  font-weight: 600;
+  padding-top: 20px;
+}
+
 .movie-container {
   display: flex;
   justify-content: center;
