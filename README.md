@@ -1,3 +1,32 @@
+
+#                                                             React Movie App
+
+![Capture](https://user-images.githubusercontent.com/45422022/116624262-f0a43e80-a947-11eb-9de7-70c018a4aebb.PNG)
+
+![Capture1](https://user-images.githubusercontent.com/45422022/116624361-1a5d6580-a948-11eb-84f8-ee1b70a3aded.PNG)
+
+![Capture2](https://user-images.githubusercontent.com/45422022/116624596-80e28380-a948-11eb-8666-efa6c928f7a5.PNG)
+
+
+
+
+
+
+								  
+								  
+								      
+								      
+								      
+
+
+
+
+
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
