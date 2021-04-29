@@ -3,80 +3,88 @@ import './App.css';
 import Movie from "./components/Movie";
 
 import React, { useEffect, useState } from "react";
+import DetailMovie from './components/DetailMovie';
 
 const FEATURED_API ="https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=2ae13bacb05742feb24cddf8e6d72335&page=1";
 const IMG_API = "https://image.tmdb.org/t/p/w500";
 const SEARCH_API = "https://api.themoviedb.org/3/search/movie?&api_key=2ae13bacb05742feb24cddf8e6d72335&query="
 const TOP_10_MOVIES = "https://api.themoviedb.org/3/movie/top_rated?api_key=2ae13bacb05742feb24cddf8e6d72335&language=en-US&page=1"
 
+const headerTitles = {
+  FEATURED_API: "Featured movies",
+  SEARCH_API: "Search results",
+  TOP_10_MOVIES: "Top 10 movies"
+}
+
 function App() {
-  const [ info, setInfo] = useState([]);
-  const [search, setSearch] = useState("")
+  const [activeTab, setActiveTab] = useState(0)
   const [movies, setMovies] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [headerTitle, setHeaderTitle] = useState('')
+  const [detailMovie, setDetailMovie] = useState(null)
 
-  useEffect(() => {   
-    fetchInfo();
-    getMovies(FEATURED_API);
-
-    if(searchTerm.length == 0){
-      fetch(`{API}$query=${search}`);
-    }else {
-      fetch(`{API}$query=${search}`);
-    }
-    },[searchTerm]);
-
-    
+  // Call search API dependency of searchTerm
+  useEffect(() => {
+    if (searchTerm.length === 0) {
+      if (activeTab === 0) {
+        getMovies(FEATURED_API);
+        setHeaderTitle(headerTitles['FEATURED_API'])
+      } else {
+        getMovies(TOP_10_MOVIES, 10);
+        setHeaderTitle(headerTitles['TOP_10_MOVIES'])
   
+      }
+    } else {
+      // Append to API searchTerm
+      getMovies(`${SEARCH_API}${searchTerm}`);
+      setHeaderTitle(headerTitles['SEARCH_API'])
+    }
+  }, [activeTab, searchTerm])
 
-  const fetchInfo = () => {
-    fetch(`{API}$query=${search}`)
-      .then((result) => result.json())
-      .then((data) => search(data.hits))
-      .catch((err) => console.log(err));
-  };
-
-  const getMovies = (API) => {
+  const getMovies = (API, perPage = 20) => {
     fetch(API)
     .then((res) => res.json())
     .then((data) => {
-       setMovies(data.results);
+       setMovies(data.results && data.results.slice(0, perPage));
     });
   }
 
   const handleOnChnage = (e) => {
     e.preventDefault();
-
-    if(searchTerm.length > 1) {
-      getMovies(SEARCH_API + searchTerm);
- 
-    } 
-
-   setSearchTerm(e.target.value);
-
+    setSearchTerm(e.target.value);
   }
   
   return (
     <>
     <header>
-        <input 
-            className="search" 
-            type="search" 
-            placeholder="Search..."
-            value={searchTerm} 
-            onChange={handleOnChnage}
-        />
-        {info.map((n,i) => <p key={i}>
-        {n.title}
-        </p>
-        )}
+      <h2 className='header-title'>{searchTerm && searchTerm.length > 0 ? `${headerTitle}: ${searchTerm}` : headerTitle}</h2>
+      <input 
+          className="search" 
+          type="search" 
+          placeholder="Search..."
+          value={searchTerm} 
+          onChange={(e) => handleOnChnage(e)}
+      />
     </header>
     <div className="movie-main">
-      10 MOVIES/TV SHOWS
+      <button 
+        className={`${activeTab === 0 ? 'active' : ''}`}
+        onClick={() => setActiveTab(0)}>
+          FEATURED MOVIES
+      </button>
+      <button 
+        className={`${activeTab === 1 ? 'active' : ''}`}
+        onClick={() => setActiveTab(1)}>
+          10 MOVIES/TV SHOWS
+      </button>
     </div>
-      <div className="movie-container">
-        {movies.length > 0 && movies.map((movie) => <Movie key={movie.id} {...movie} />)}
-      </div>
+      {detailMovie ? (
+        <DetailMovie movie={detailMovie} setDetailMovie={setDetailMovie}/>
+      ) : (
+        <div className="movie-container">
+          {movies.length > 0 && movies.map((movie) => <Movie key={movie.id} {...movie} movie={movie} setDetailMovie={setDetailMovie}/>)}
+        </div>
+      )}
       </>
   );
 }
