@@ -7,26 +7,14 @@
 
 ![Capture2](https://user-images.githubusercontent.com/45422022/116624596-80e28380-a948-11eb-8666-efa6c928f7a5.PNG)
 
+# DOWNLOAD
 
+You can download the folder on my [GitHub](https://github.com/mirzahab85) or you can do this directly on this [link](https://github.com/mirzahab85/React-Movie-App).
 
+If you have git installed on your PC, you just need do as follow:
 
-
-
-								  
-								  
-								      
-								      
-								      
-
-
-
-
-
-
-
-
-
-
+$ git clone https://github.com/mirzahab85/React-Movie-App
+						   
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
