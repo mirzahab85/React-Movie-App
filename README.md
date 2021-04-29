@@ -12,8 +12,17 @@
 You can download the folder on my [GitHub](https://github.com/mirzahab85) or you can do this directly on this [link](https://github.com/mirzahab85/React-Movie-App).
 
 If you have git installed on your PC, you just need do as follow:
+``` 
+$ git clone https://github.com/mirzahab85/React-Movie-App 
+```
 
-$ git clone https://github.com/mirzahab85/React-Movie-App
+# Instalation App
+
+```
+$ md movie-app
+$ cd movie-app
+$ npm install
+```
 						   
 # Getting Started with Create React App
 
