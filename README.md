@@ -13,7 +13,7 @@ You can download the folder on my [GitHub](https://github.com/mirzahab85) or you
 
 If you have git installed on your PC, you just need do as follow:
 ``` 
-$ git clone https://github.com/mirzahab85/React-Movie-App 
+$ git clone https://github.com/mirzahab85/React-Movie-App.git 
 ```
 
 # Instalation App
